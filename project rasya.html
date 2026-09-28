@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5">
+    <title>Rayon Hub — Absensi &amp; Piket Rayon</title>
+    <link rel="stylesheet" href="CSS/project%20rasya.css">
+    <script src="JS/project%20rasya.js" defer></script>
+</head>
+<body>
+    <main id="loginPage" class="login-page">
+        <section class="brand-panel" aria-label="Tentang Rayon Hub">
+            <div class="brand-mark" aria-hidden="true">R</div>
+            <div class="brand-copy">
+                <h1>Rayon Hub</h1>
+                <p class="brand-subtitle">Sistem Absensi dan Piket Rayon</p>
+                <p class="brand-description">Catat kehadiran dan atur jadwal piket dengan mudah.</p>
+            </div>
+        </section>
+        <section class="login-side">
+            <form id="loginForm" class="login-card">
+                <header class="login-heading">
+                    <h2>Selamat Datang</h2>
+                    <p>Masuk untuk melanjutkan ke dashboard.</p>
+                </header>
+                <div class="field">
+                    <label for="loginId">NIS / Email</label>
+                    <div class="input-wrap"><input id="loginId" name="loginId" type="text" placeholder="Masukkan NIS atau email" autocomplete="username" required></div>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap has-toggle">
+                        <input id="password" name="password" type="password" placeholder="Masukkan password" autocomplete="current-password" required>
+                        <button id="passwordToggle" class="password-toggle" type="button" aria-label="Tampilkan password" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                <button class="primary-button login-submit" type="submit">Masuk</button>
+                <p class="login-help"><a id="forgotPassword" href="#">Lupa password? Hubungi pembimbing rayon</a></p>
+            </form>
+        </section>
+    </main>
+
+    <div id="appPage" class="app-shell hidden">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-mark" aria-hidden="true">R</div>
+                <div><strong>Rayon Hub</strong><span>Absensi &amp; Piket Rayon</span></div>
+            </div>
+            <nav id="navigation" class="nav-menu" aria-label="Navigasi utama"></nav>
+            <button id="logoutButton" class="logout-button" type="button">Keluar</button>
+        </aside>
+        <button id="mobileOverlay" class="mobile-overlay" type="button" aria-label="Tutup menu"></button>
+        <section class="main-area">
+            <div class="mobile-topbar">
+                <button id="menuButton" class="menu-button" type="button" aria-label="Buka menu">☰</button>
+                <div class="mobile-brand"><span class="sidebar-mark" aria-hidden="true">R</span> Rayon Hub</div>
+                <div class="avatar" aria-label="Admin Rayon">NP</div>
+            </div>
+            <header class="page-top">
+                <div class="page-heading"><h1 id="pageTitle"></h1><p id="pageSubtitle"></p></div>
+                <div class="user-pill">
+                    <div class="avatar">NP</div>
+                    <div><strong id="userName">Nama Pengguna</strong><span id="userRole">Admin Rayon</span></div>
+                </div>
+            </header>
+            <div id="pageContent"></div>
+        </section>
+    </div>
+
+    <div id="scheduleModal" class="overlay hidden" role="presentation">
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+            <header class="modal-header">
+                <div><h2 id="scheduleModalTitle">Tambah Jadwal Piket</h2><p id="scheduleModalDescription">Atur petugas piket rayon.</p></div>
+                <button id="closeModal" class="close-button" type="button" aria-label="Tutup">×</button>
+            </header>
+            <form id="scheduleForm">
+                <div class="field"><label for="memberSelect">Nama anggota</label><select id="memberSelect" required></select></div>
+                <div class="field"><label for="daySelect">Hari</label><select id="daySelect" required></select></div>
+                <div class="field"><label for="dutySelect">Jenis piket</label><select id="dutySelect"><option>Rayon</option><option>Toilet</option></select></div>
+                <div class="field"><label for="timeInput">Jam</label><input id="timeInput" type="time" value="15:00" required></div>
+                <div class="modal-actions"><button id="deleteScheduleButton" class="danger-button hidden" type="button">Hapus</button><button id="cancelModal" class="secondary-button" type="button">Batal</button><button class="primary-button" type="submit">Simpan jadwal</button></div>
+            </form>
+        </section>
+    </div>
+    <div id="memberModal" class="overlay hidden" role="presentation">
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle">
+            <header class="modal-header">
+                <div><h2 id="memberModalTitle">Tambah Anggota</h2><p>Lengkapi data anggota rayon.</p></div>
+                <button id="closeMemberModal" class="close-button" type="button" aria-label="Tutup">×</button>
+            </header>
+            <form id="memberForm">
+                <div class="field"><label for="memberNameInput">Nama</label><input id="memberNameInput" type="text" autocomplete="name" required></div>
+                <div class="field"><label for="memberNisInput">NIS</label><input id="memberNisInput" type="text" inputmode="numeric" required></div>
+                <div class="field"><label for="memberRombelInput">Rombel</label><input id="memberRombelInput" type="text" placeholder="PPLG XI-1" required></div>
+                <div class="field"><label for="memberGroupInput">Kelompok Piket</label><select id="memberGroupInput" required>
+                    <option>Kelompok 1</option><option>Kelompok 2</option><option>Kelompok 3</option><option>Kelompok 4</option><option>Kelompok 5</option>
+                </select></div>
+                <div class="modal-actions"><button id="cancelMemberModal" class="secondary-button" type="button">Batal</button><button class="primary-button" type="submit">Simpan anggota</button></div>
+            </form>
+        </section>
+    </div>
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+</body>
+</html>
